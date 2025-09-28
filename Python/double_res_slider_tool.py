@@ -71,7 +71,7 @@ ax[0][1].set_xlim([1,25])
 ax[0][1].set_xlabel('Frequency / MHz')
 ax[0][1].set_ylabel('RL / dB')
 ax[0][1].grid(True)
-ax[0][1].legend()
+ax[0][1].legend(loc='upper left')
 
 # impedance zoomed in at f(Na)
 line1, = ax[1][0].plot(1e-6 * f, Z.real, label=r'$\Re(Z)$')

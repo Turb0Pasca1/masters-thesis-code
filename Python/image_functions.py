@@ -107,7 +107,7 @@ def find_ROI(image, lthreshold, uthreshold, sigma=.4):
     ROI = labeled_mask == largest_label
     return ROI
 
-def get_noise(noise_image, image_params, ROI_fix_params=None):
+def get_noise(noise_data, image_params, ROI_fix_params=None):
     '''
     plots noise image and histogram
     fits Gauss distribution to histogram
@@ -123,6 +123,12 @@ def get_noise(noise_image, image_params, ROI_fix_params=None):
                         center:             optional 
                                             center of ROI in mm as a list in the form of [read, phase]
     '''
+    # reshape data to correct dimensions
+    noise_image = np.array(noise_data).reshape((image_params[1], image_params[0]))
+
+    # convert to nT
+    noise_image *= 1e9
+
     noise_image_real = np.real(noise_image)
     noise_image_imag = np.imag(noise_image)
     # used for imshow to scale image axis to mm instead of samples
@@ -225,7 +231,7 @@ def get_noise(noise_image, image_params, ROI_fix_params=None):
         return [total_noise, total_noise_roi]
     return [total_noise]
 
-def image_eval(signal_image, image_params, ROI_fix_params, ROI_fit_params, ROI_noise_params, fit=False):
+def image_eval(data, image_params, ROI_fix_params, ROI_fit_params, ROI_noise_params, fit=False):
     '''
     plots signal image and histogram
     fits Gauss distribution to histogram
@@ -251,6 +257,13 @@ def image_eval(signal_image, image_params, ROI_fix_params, ROI_fit_params, ROI_n
                                             center of ROI in mm as a list in the form of [read, phase]
     fit:                Bool if fitting ROI is tried                 
     '''
+
+    # reshape data to correct dimensions
+    signal_image = np.array(data).reshape((image_params[1], image_params[0]))
+
+    # convert to nT
+    signal_image *= 1e9
+
     # calculate real, imag, magnitude and phase of complex data
     signal_image_real = np.real(signal_image)
     signal_image_imag = np.imag(signal_image)
@@ -381,7 +394,14 @@ def image_eval(signal_image, image_params, ROI_fix_params, ROI_fit_params, ROI_n
     snr = total_mean / total_noise
     return [total_noise, total_mean, snr]
 
-def abs_image(signal_image, image_params):
+def abs_image(data, image_params):
+
+    # reshape data to correct dimensions
+    signal_image = np.array(data).reshape((image_params[1], image_params[0]))
+
+    # convert to nT
+    signal_image *= 1e9
+
     # used for imshow to scale image axis to mm instead of samples
     extent = [-image_params[2]/2, image_params[2]/2, -image_params[3]/2, image_params[3]/2]
     fig, ax = plt.subplots()
