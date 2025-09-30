@@ -303,6 +303,7 @@ def calculate_q(f, arr, threshold=-3, prominence=1):
             i += 1
         return dip_freq, bandwidth, q_factor, dip_indices
     
+# plots VNA data
 def visualize_VNA(datatype, data_fname, plot,  xlim=None, ylimZ=None, ylimRL=None, xticksint=False):
 
     error_msg_1 = ('ERROR: invalid datatype\n' 
@@ -472,7 +473,11 @@ def visualize_VNA(datatype, data_fname, plot,  xlim=None, ylimZ=None, ylimRL=Non
             print(f'df = {1e3*df[i]:.2f} kHz')      
     else:
         return print('No valid template to plot from')
-    
+
+# plots VNA data
+# different from visualize_VNA the data is not in the form of S_11  and
+# not imported from external files
+# used to plot simulation results
 def visualize_Z_RL(f, Z, xlim=None, ylimZ=None, ylimRL=None, xticksint=False):
     f_Na = 5.694
     f_H = 21.527
