@@ -1,4 +1,4 @@
-# double_res_slider_tool.py
+# double_res_slider_tool_Schnall.py
 # adjusted to work with Schnall 1985 original circuit, presented in paper
 import numpy as np
 import matplotlib.pyplot as plt
