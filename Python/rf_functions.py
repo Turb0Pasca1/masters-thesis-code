@@ -162,7 +162,7 @@ def Tadanki(w, C_Mhf, C_Mlf, C_Thf, C_Tlf, L_t1, R_t1, C_t1, L_t2, R_t2, C_t2, L
     Z4 = 1/(1/(Z_L(w, L_S, R_S))+1/(Z_C(w, C_Thf))+1/(Z3))
     return Z2 + Z4
 
-def Schnall(w, C_1, C_2, C_3, L_1, R_1, L_3, R_3, L_S=2.3e-6, R_S=.2):
+def Schnall(w, C_1, C_2, C_3, L_1, R_1, L_3, R_3, L_S=2.3e-6, R_S=.36):
     '''
     returns total impedance of a double resonant circuit presented in Schnall et al 1985 at w
     w:      angular frequency in rad/s
